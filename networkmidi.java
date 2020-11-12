@@ -66,9 +66,9 @@ public class networkmidi {
         ShortMessage mes = new ShortMessage(icommand, ichannel, idata1, idata2);
         return mes;
     }
+    //midi receiver for sending messages
     public static class networkReceiver implements Receiver {
-        //String ip = "216.56.9.162";
-        static String ip = "192.168.1.201";
+        static String ip = "91.321.24.201";
         Socket s;
         public static String device;
         public networkReceiver(String ip, int port, String device){
