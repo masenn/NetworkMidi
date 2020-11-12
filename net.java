@@ -10,6 +10,7 @@ import static javax.sound.midi.ShortMessage.*;
 public class net {
     public static boolean clientConnected = false;
     public static boolean hostConnected = false;
+    //opens Host socket
     public static Socket connectHost(int port) throws IOException{
         ServerSocket ss = new ServerSocket(port);
         Socket wait = ss.accept();
@@ -17,25 +18,29 @@ public class net {
         System.out.println("Host Connected");
         return wait;
     }
+    //opens client socket
     public static Socket connectClient(String ip, int port) throws IOException{
         Socket s = new Socket(ip,port);
         clientConnected=true;
         System.out.println("Client Connect");
         return s;
     }
+    //writes message over TCP
     static void write(String e, Socket socket) throws IOException{
         DataOutputStream out;
         out = new DataOutputStream(socket.getOutputStream());
         out.writeUTF(e);
         out.flush();
     }
-    //to recieve serial messages from the socket
+    //recieves messages from the socket
     static String getMessage(Socket s, Deque deque) throws IOException{
         DataInputStream in = new DataInputStream(s.getInputStream());
         String e = in.readUTF();
         deque.add(e);
         return e;
     }
+    //allows all message data to be sent through a singular string
+    //the message is pulled apart and sent as the appropriate message
     public static ShortMessage pullApart(String cmd) throws InvalidMidiDataException{
         int velocity = 0;
         String[] out = cmd.split("-");
