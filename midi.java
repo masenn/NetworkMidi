@@ -68,6 +68,7 @@ public class midi {
             System.out.println("Cannot open device.");
         }
     }
+    //initializes the device based on a custom receiver (in this case, the network receiver)
     public static void initDevice (MidiDevice device, Receiver receiver){
         try {
             Transmitter t = device.getTransmitter();
@@ -82,6 +83,7 @@ public class midi {
             System.out.println("Cannot open device.");
         }
     }
+    //method to play a midi file (not currently used in this project, but still useful)
     public static void playMidi(MidiDevice device,String file){
         try {
             midi.initDevice(device);
@@ -111,6 +113,7 @@ public class midi {
     public static String getDeviceName(){
         return devicename;
     }
+    //receiver to print out midi messages
     public static class receiver implements Receiver {
         
         @Override
@@ -148,5 +151,4 @@ class Host {
         this.ip = ip;
         
     }
-    //begin connect
 }
